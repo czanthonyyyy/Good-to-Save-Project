@@ -1,0 +1,87 @@
+/* Estilos para arreglar el header */
+
+#header {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1rem 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.header-logo {
+    flex: 0 0 auto;
+}
+
+#header-nav-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.header-main-nav {
+    display: flex;
+    margin: 0 2rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.header-main-nav li {
+    margin: 0 1.5rem;
+}
+
+.header-main-nav li a {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.header-main-nav li a:hover {
+    color: #39b54a;
+}
+
+#header-nav-wrap .cta {
+    padding: 0.6rem 1.2rem;
+    font-size: 1.3rem;
+    background-color: #39b54a;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#header-nav-wrap .cta:hover {
+    background-color: #318f3d;
+}
+
+/* Media queries para responsividad */
+@media only screen and (max-width: 768px) {
+    .header-content {
+        padding: 0 1rem;
+    }
+    
+    .header-main-nav {
+        margin-right: 1rem;
+    }
+    
+    .header-main-nav li {
+        margin: 0 1rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #header-nav-wrap .cta {
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
+    }
+} 
