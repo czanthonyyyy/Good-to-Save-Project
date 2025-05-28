@@ -257,3 +257,135 @@
  
 
 })(jQuery);
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Variables
+    const cartItems = document.querySelector('.carrito-items');
+    const totalPrice = document.querySelector('.carrito-precio-total');
+    const items = document.querySelectorAll('.item');
+    const carrito = document.querySelector('.carrito');
+    const contenedor = document.querySelector('.contenedor');
+    let cart = [];
+
+    // Funciones
+    const showCart = () => {
+        carrito.classList.add('activo');
+        contenedor.classList.add('carrito-activo');
+    };
+
+    const hideCartIfEmpty = () => {
+        if (cart.length === 0) {
+            carrito.classList.remove('activo');
+            contenedor.classList.remove('carrito-activo');
+        }
+    };
+
+    const addToCart = (item) => {
+        const itemInfo = {
+            id: Date.now(),
+            title: item.querySelector('.titulo-item').textContent,
+            price: parseFloat(item.querySelector('.precio-item').textContent.replace('$', '')),
+            img: item.querySelector('.img-item').src,
+            quantity: 1
+        };
+
+        const existingItem = cart.find(cartItem => cartItem.title === itemInfo.title);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cart.push(itemInfo);
+        }
+
+        updateCart();
+        showCart();
+    };
+
+    const updateCart = () => {
+        cartItems.innerHTML = '';
+        let total = 0;
+
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.className = 'carrito-item';
+            cartItem.innerHTML = `
+                <img src="${item.img}" alt="${item.title}">
+                <div class="carrito-item-detalles">
+                    <span class="carrito-item-titulo">${item.title}</span>
+                    <div class="selector-cantidad">
+                        <i class="fas fa-minus restar-cantidad" data-id="${item.id}"></i>
+                        <input type="text" value="${item.quantity}" class="carrito-item-cantidad" disabled>
+                        <i class="fas fa-plus sumar-cantidad" data-id="${item.id}"></i>
+                    </div>
+                    <span class="carrito-item-precio">$${(item.price * item.quantity).toFixed(2)}</span>
+                </div>
+                <button class="btn-eliminar" data-id="${item.id}">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            cartItems.appendChild(cartItem);
+            total += item.price * item.quantity;
+        });
+
+        totalPrice.textContent = `$${total.toFixed(2)}`;
+        saveCart();
+        hideCartIfEmpty();
+    };
+
+    const removeFromCart = (id) => {
+        cart = cart.filter(item => item.id !== id);
+        updateCart();
+    };
+
+    const updateQuantity = (id, increment) => {
+        const item = cart.find(item => item.id === id);
+        if (item) {
+            if (increment) {
+                item.quantity++;
+            } else if (item.quantity > 1) {
+                item.quantity--;
+            }
+            updateCart();
+        }
+    };
+
+    const saveCart = () => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    };
+
+    const loadCart = () => {
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+            cart = JSON.parse(savedCart);
+            updateCart();
+            if (cart.length > 0) {
+                showCart();
+            }
+        }
+    };
+
+    // Event Listeners
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('boton-item')) {
+            const item = e.target.closest('.item');
+            addToCart(item);
+        }
+
+        if (e.target.classList.contains('btn-eliminar') || e.target.closest('.btn-eliminar')) {
+            const id = parseInt(e.target.closest('.btn-eliminar').dataset.id);
+            removeFromCart(id);
+        }
+
+        if (e.target.classList.contains('sumar-cantidad')) {
+            const id = parseInt(e.target.dataset.id);
+            updateQuantity(id, true);
+        }
+
+        if (e.target.classList.contains('restar-cantidad')) {
+            const id = parseInt(e.target.dataset.id);
+            updateQuantity(id, false);
+        }
+    });
+
+    // Inicialización
+    loadCart();
+});

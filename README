@@ -1,0 +1,73 @@
+# Good to Save
+
+## Descripción
+Good to Save es un proyecto innovador y plataforma en línea diseñada para abordar los problemas críticos del desperdicio de alimentos y el hambre en Panamá. La plataforma conecta a los consumidores con excedentes de alimentos de restaurantes y supermercados a precios reducidos, mientras también proporciona un medio para donar comidas a personas necesitadas.
+
+## Características Principales
+- 🛒 Catálogo de productos con ofertas de diferentes restaurantes
+- 🔐 Sistema de autenticación de usuarios
+- 💳 Sistema de pagos integrado
+- 📱 Diseño responsivo para todos los dispositivos
+- 🌐 Integración con redes sociales
+- 🛍️ Carrito de compras funcional
+
+## Estructura del Proyecto
+```
+gts-new-website/
+├── backend/            # Lógica del servidor y API
+├── public/            # Archivos estáticos
+│   ├── assets/       # Imágenes, logos y favicons
+│   ├── css/         # Estilos compilados
+│   └── js/          # Scripts del cliente
+├── src/              # Código fuente
+│   ├── components/  # Componentes reutilizables
+│   └── libs/        # Bibliotecas y utilidades
+├── css/              # Estilos adicionales
+└── fonts/            # Fuentes tipográficas
+```
+
+## Archivos Principales
+- `index.html` - Página principal del sitio
+- `catalog.html` - Catálogo de productos y ofertas
+- `log in form.html` - Formulario de inicio de sesión
+- `paymenthmethod.html` - Página de métodos de pago
+- `QR.html` - Página de códigos QR
+- `styles.css`, `styles1.css`, `styles3.css`, `styles4.css`, `styles5.css` - Hojas de estilo del sitio
+
+## Tecnologías Utilizadas
+- HTML5
+- CSS3
+- JavaScript
+- Firebase (Backend)
+- Font Awesome (Iconos)
+- Modernizr
+- Pace.js
+
+## Requisitos del Sistema
+- Navegador web moderno con soporte para HTML5 y CSS3
+- Conexión a Internet
+- JavaScript habilitado
+
+## Instalación y Uso
+1. Clonar el repositorio
+2. Abrir `index.html` en un navegador web
+3. Para desarrollo, asegurarse de tener todas las dependencias instaladas
+
+## Características de la Aplicación
+- **Página Principal**: Presentación del proyecto y sus beneficios
+- **Catálogo**: Listado de ofertas disponibles de diferentes restaurantes
+- **Sistema de Autenticación**: Registro y inicio de sesión de usuarios
+- **Carrito de Compras**: Funcionalidad completa para realizar pedidos
+- **Métodos de Pago**: Integración con sistemas de pago
+- **Perfil de Usuario**: Gestión de información personal
+
+## Contacto
+- Email: admins@goodtosave.org.pa
+- Teléfono: (+507) 6410 0422
+- Instagram: [@good_to_save_](https://www.instagram.com/good_to_save_?igsh=NGg3MDNubml0b3Nr)
+
+## Estado del Proyecto
+El proyecto está en desarrollo activo y acepta contribuciones.
+
+## Licencia
+Derechos reservados © Good to Save

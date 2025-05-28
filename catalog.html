@@ -10,98 +10,127 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="styles3.css">
+    <link rel="stylesheet" href="public/css/catalog.css">
+    
+    <!-- Scripts necesarios para el footer -->
+    <script src="public/js/modernizr.js"></script>
+    <script src="public/js/pace.min.js"></script>
+    <script src="https://kit.fontawesome.com/4496fe260a.js" crossorigin="anonymous"></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <script src="app.js" async></script>
-    <title>| Catalog | </title>
+    <link rel="icon" type="image/png" sizes="32x32" href="public/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="public/assets/favicon/site.webmanifest">
+    <script src="public/js/app.js" async></script>
+    <title>Catálogo | Good to Save</title>
 </head>
 
 <body>
-    <header>
-        <a href="index.html" class="back-button">
-            <i class="fa-solid fa-arrow-left"></i>
-        </a>
-        <h1>Catalog</h1>
+    <header id="header">
+        <div class="header-inner">
+            <div class="header-logo">
+                <a href="index.html">Good to Save</a>
+            </div>
+
+            <nav id="header-nav-wrap">
+                <ul class="header-main-nav">
+                    <li><a href="index.html#home" title="home">Home</a></li>
+                    <li><a href="index.html#about" title="about">About</a></li>
+                    <li><a href="index.html#pricing" title="offers">Offers</a></li>
+                    <li><a href="index.html#download" title="download">Download</a></li>
+                    <li class="current"><a href="catalog.html" title='catalog'>Catalog</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-cta">
+                <a href="log in form.html" title="sign-up" class="button button-primary cta">Sign Up</a>
+            </div>
+        </div>
     </header>
+
+    <!-- Hero Section -->
+    <section class="catalog-hero">
+        <h1>Nuestro Catálogo</h1>
+        <p>Descubre las mejores ofertas de comida y ayuda a reducir el desperdicio de alimentos</p>
+    </section>
+
     <section class="contenedor">
         <!-- Contenedor de elementos -->
         <div class="contenedor-items">
             <div class="item">
                 <span class="titulo-item">King's box</span>
-                <img src="img/Burger-King.png" alt="" class="img-item">
+                <img src="public/assets/img/Burger-King.png" alt="" class="img-item">
                 <span class="precio-item">$2.50</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Smile and Enjoy</span>
-                <img src="img/McDonald's.png" alt="" class="img-item">
+                <img src="public/assets/img/McDonald's.png" alt="" class="img-item">
                 <span class="precio-item">$3.15</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Tasssty box</span>
-                <img src="img/Krispy-Kreme.png" alt="" class="img-item">
+                <img src="public/assets/img/Krispy-Kreme.png" alt="" class="img-item">
                 <span class="precio-item">$3.00</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Taco Box</span>
-                <img src="img/Taco-Bell.png" alt="" class="img-item">
+                <img src="public/assets/img/Taco-Bell.png" alt="" class="img-item">
                 <span class="precio-item">$2.45</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Totumas</span>
-                <img src="img/Las-Totumas.png" alt="" class="img-item">
+                <img src="public/assets/img/Las-Totumas.png" alt="" class="img-item">
                 <span class="precio-item">$3.25</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Meat and more</span>
-                <img src="img/Brazzeiro.png" alt="" class="img-item">
+                <img src="public/assets/img/Brazzeiro.png" alt="" class="img-item">
                 <span class="precio-item">$5.80</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Full breakfast</span>
-                <img src="img/en-la-fonda.png" alt="" class="img-item">
+                <img src="public/assets/img/en-la-fonda.png" alt="" class="img-item">
                 <span class="precio-item">$4.00</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Delicious box</span>
-                <img src="img/Sabroso-Panama.png" alt="" class="img-item">
+                <img src="public/assets/img/Sabroso-Panama.png" alt="" class="img-item">
                 <span class="precio-item">$2.80</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Marañon box</span>
-                <img src="img/marañon.jpg" alt="" class="img-item">
+                <img src="public/assets/img/marañon.jpg" alt="" class="img-item">
                 <span class="precio-item">$1.60</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Charged meal</span>
-                <img src="img/lafonda.jpg" alt="" class="img-item">
+                <img src="public/assets/img/lafonda.jpg" alt="" class="img-item">
                 <span class="precio-item">$1.45</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Panamanian box</span>
-                <img src="img/elmotete.jpg" alt="" class="img-item">
+                <img src="public/assets/img/elmotete.jpg" alt="" class="img-item">
                 <span class="precio-item">$2.10</span>
                 <button class="boton-item">Add to cart</button>
             </div>
             <div class="item">
                 <span class="titulo-item">Endless Lunch</span>
-                <img src="img/lenos-y-carbon.png" alt="" class="img-item">
+                <img src="public/assets/img/lenos-y-carbon.png" alt="" class="img-item">
                 <span class="precio-item">$3.50</span>
                 <button class="boton-item">Add to cart</button>
             </div>
         </div>
+
         <!-- Carrito de Compras -->
         <div class="carrito" id="carrito">
             <div class="header-carrito">
@@ -109,51 +138,104 @@
             </div>
 
             <div class="carrito-items">
-                <!-- 
-                <div class="carrito-item">
-                    <img src="img/boxengasse.png" width="80px" alt="">
-                    <div class="carrito-item-detalles">
-                        <span class="carrito-item-titulo">Box Engasse</span>
-                        <div class="selector-cantidad">
-                            <i class="fa-solid fa-minus restar-cantidad"></i>
-                            <input type="text" value="1" class="carrito-item-cantidad" disabled>
-                            <i class="fa-solid fa-plus sumar-cantidad"></i>
-                        </div>
-                        <span class="carrito-item-precio">$15.000,00</span>
-                    </div>
-                   <span class="btn-eliminar">
-                        <i class="fa-solid fa-trash"></i>
-                   </span>
-                </div>
-                <div class="carrito-item">
-                    <img src="img/skinglam.png" width="80px" alt="">
-                    <div class="carrito-item-detalles">
-                        <span class="carrito-item-titulo">Skin Glam</span>
-                        <div class="selector-cantidad">
-                            <i class="fa-solid fa-minus restar-cantidad"></i>
-                            <input type="text" value="3" class="carrito-item-cantidad" disabled>
-                            <i class="fa-solid fa-plus sumar-cantidad"></i>
-                        </div>
-                        <span class="carrito-item-precio">$18.000,00</span>
-                    </div>
-                   <button class="btn-eliminar">
-                        <i class="fa-solid fa-trash"></i>
-                   </button>
-                </div>
-                 -->
+                <!-- Los items del carrito se agregarán dinámicamente aquí -->
             </div>
+
             <div class="carrito-total">
                 <div class="fila">
-                    <strong>Tu Total</strong>
-                    <span class="carrito-precio-total">
-
-                    </span>
+                    <strong>Total</strong>
+                    <span class="carrito-precio-total">$0.00</span>
                 </div>
-                <button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i> </button>
+                <button class="btn-pagar">
+                    <i class="fas fa-shopping-bag"></i>
+                    Proceder al pago
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main">
+            <div class="row">
+                <div class="col-three md-1-3 tab-full footer-info">
+                    <div class="footer-logo"></div>
+                    <p>
+                        Good to Save isn't just a project. It's a movement towards sustainability, economic empowerment,
+                        and social responsibility. Make a difference with Good to Save and be part of the solution to
+                        food waste and hunger.
+                    </p>
+                    <ul class="footer-social-list">
+                        <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a href="https://www.instagram.com/good_to_save_?igsh=NGg3MDNubml0b3Nr">
+                            <i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="col-three md-1-3 tab-1-2 mob-full footer-contact">
+                    <h4>Contact</h4>
+                    <p>
+                        1600 Amphitheatre Parkway<br>
+                        Mountain View, CA <br>
+                        94043 US<br>
+                    </p>
+                    <p>
+                        admins@goodtosave.org.pa <br>
+                        Phone: (+507) 6410 0422 <br>
+                        Fax: (+507) 555 0100
+                    </p>
+                </div>
+
+                <div class="col-two md-1-3 tab-1-2 mob-full footer-site-links">
+                    <h4>Site Links</h4>
+                    <ul class="list-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-four md-1-2 tab-full footer-subscribe">
+                    <h4>Our Newsletter</h4>
+                    <p>Subscribe to our newsletter and get the latest news, updates, and offers.</p>
+                    <div class="subscribe-form">
+                        <form id="mc-form" class="group" novalidate="true">
+                            <input type="email" value="" name="EMAIL" class="email" id="mc-email"
+                                placeholder="Email Address" required="">
+                            <input type="submit" name="subscribe" value="Send">
+                            <label for="mc-email" class="subscribe-message"></label>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
-    </section>
+        <div class="footer-bottom">
+            <div class="row">
+                <div class="col-twelve">
+                    <div class="copyright">
+                        <span>© Copyright Good to Save 2024.</span>
+                        <span>Developed by Anthony J. Cruz</span>
+                    </div>
+                    <div id="go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top"><i class="icon-arrow-up"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+    <script src="public/js/main.js"></script>
 </body>
 
 </html>
