@@ -5,69 +5,98 @@ Good to Save es un proyecto innovador y plataforma en línea diseñada para abor
 
 ## Características Principales
 - 🛒 Catálogo de productos con ofertas de diferentes restaurantes
-- 🔐 Sistema de autenticación de usuarios
+- 🔐 Sistema de autenticación de usuarios mediante Firebase
 - 💳 Sistema de pagos integrado
 - 📱 Diseño responsivo para todos los dispositivos
 - 🌐 Integración con redes sociales
 - 🛍️ Carrito de compras funcional
+- 📊 Panel de administración para gestión de contenido
 
 ## Estructura del Proyecto
 ```
-gts-new-website/
-├── backend/            # Lógica del servidor y API
-├── public/            # Archivos estáticos
-│   ├── assets/       # Imágenes, logos y favicons
-│   ├── css/         # Estilos compilados
-│   └── js/          # Scripts del cliente
-├── src/              # Código fuente
-│   ├── components/  # Componentes reutilizables
-│   └── libs/        # Bibliotecas y utilidades
-├── css/              # Estilos adicionales
-└── fonts/            # Fuentes tipográficas
+Good-to-Save-Project/
+├── backend/                # Lógica del servidor y API
+│   └── api/
+│       └── firebase/      # Configuración y servicios de Firebase
+├── css/                   # Estilos adicionales
+│   ├── font-awesome/      # Iconos de Font Awesome
+│   └── micons/           # Iconos personalizados
+├── fonts/                 # Fuentes tipográficas
+│   ├── montserrat/       # Familia tipográfica Montserrat
+│   └── muli/             # Familia tipográfica Muli
+├── public/               # Archivos estáticos y recursos públicos
+│   ├── assets/          # Recursos multimedia
+│   │   ├── favicon/     # Iconos del sitio
+│   │   └── img/         # Imágenes del sitio
+│   ├── components/      # Componentes web reutilizables
+│   ├── css/            # Estilos compilados
+│   ├── js/             # Scripts del cliente
+│   └── pages/          # Páginas estáticas
+└── src/                # Código fuente principal
+    └── firebase/       # Integración con Firebase
 ```
 
 ## Archivos Principales
 - `index.html` - Página principal del sitio
-- `catalog.html` - Catálogo de productos y ofertas
-- `log in form.html` - Formulario de inicio de sesión
-- `paymenthmethod.html` - Página de métodos de pago
-- `QR.html` - Página de códigos QR
-- `styles.css`, `styles1.css`, `styles3.css`, `styles4.css`, `styles5.css` - Hojas de estilo del sitio
+- `vite.config.js` - Configuración del bundler Vite
+- `styles3.css` y `styles5.css` - Hojas de estilo principales
+- `package.json` - Dependencias y scripts del proyecto
 
 ## Tecnologías Utilizadas
-- HTML5
-- CSS3
-- JavaScript
-- Firebase (Backend)
-- Font Awesome (Iconos)
-- Modernizr
-- Pace.js
+- HTML5 y CSS3
+- JavaScript (ES6+)
+- Firebase (Autenticación y Backend)
+- Vite (Bundler)
+- Font Awesome y Micons (Iconografía)
+- Montserrat y Muli (Tipografías)
 
 ## Requisitos del Sistema
-- Navegador web moderno con soporte para HTML5 y CSS3
+- Node.js (versión recomendada: 14.x o superior)
+- npm o yarn como gestor de paquetes
+- Navegador web moderno con soporte para ES6
 - Conexión a Internet
-- JavaScript habilitado
 
-## Instalación y Uso
-1. Clonar el repositorio
-2. Abrir `index.html` en un navegador web
-3. Para desarrollo, asegurarse de tener todas las dependencias instaladas
+## Instalación y Desarrollo
+1. Clonar el repositorio:
+   ```bash
+   git clone [URL_del_repositorio]
+   ```
+2. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+3. Iniciar el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
 
 ## Características de la Aplicación
-- **Página Principal**: Presentación del proyecto y sus beneficios
-- **Catálogo**: Listado de ofertas disponibles de diferentes restaurantes
-- **Sistema de Autenticación**: Registro y inicio de sesión de usuarios
-- **Carrito de Compras**: Funcionalidad completa para realizar pedidos
-- **Métodos de Pago**: Integración con sistemas de pago
-- **Perfil de Usuario**: Gestión de información personal
+- **Página Principal**: Interfaz moderna y atractiva que presenta el proyecto
+- **Sistema de Autenticación**: 
+  - Registro de usuarios
+  - Inicio de sesión
+  - Recuperación de contraseña
+  - Autenticación con redes sociales
+- **Catálogo de Productos**:
+  - Listado de ofertas disponibles
+  - Filtros por categorías
+  - Búsqueda avanzada
+- **Carrito de Compras**:
+  - Gestión de productos
+  - Cálculo automático de totales
+  - Proceso de checkout optimizado
+- **Panel de Usuario**:
+  - Historial de pedidos
+  - Gestión de perfil
+  - Preferencias de notificaciones
 
-## Contacto
+## Contacto y Soporte
 - Email: admins@goodtosave.org.pa
 - Teléfono: (+507) 6410 0422
 - Instagram: [@good_to_save_](https://www.instagram.com/good_to_save_?igsh=NGg3MDNubml0b3Nr)
 
 ## Estado del Proyecto
-El proyecto está en desarrollo activo y acepta contribuciones.
+El proyecto está en desarrollo activo. Se aceptan contribuciones siguiendo nuestras guías de contribución.
 
 ## Licencia
-Derechos reservados © Good to Save
+Derechos reservados © Good to Save. Consulte el archivo `LICENSE` para más detalles.
