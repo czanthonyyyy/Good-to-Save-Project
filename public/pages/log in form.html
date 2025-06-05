@@ -205,11 +205,12 @@
             const submitButton = this.querySelector('button[type="submit"]');
             submitButton.classList.add('loading');
             
-            // Simulate API call
+            // Redirección después de una breve animación de carga
             setTimeout(() => {
               submitButton.classList.remove('loading');
-              window.location.href = '../index.html';
-            }, 1500);
+              // Aseguramos que la ruta sea relativa al root del proyecto
+              window.location.href = '/index.html';
+            }, 800); // Reducido a 800ms para una mejor experiencia de usuario
           }
         });
       });

@@ -4,10 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>| QR Code |</title>
+    <title>Your QR Code | Good to Save</title>
 
     <link rel="stylesheet" href="../css/qr.css">
-
+    <!-- Google Fonts - Montserrat para mantener consistencia con el proyecto -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <!-- QR Code library -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
@@ -17,11 +21,22 @@
 
 <body>
     <div class="container">
-        <div class="image-wrapper">
-            <img src="../assets/img/QR code.png" alt="QR Code" id="QRcode">
+        <h1 class="title">Scan this QR code to have your surprise box!</h1>
+        <div class="qr-container">
+            <div id="qrcode"></div>
         </div>
-        <button class="back-btn" onclick="window.location.href='index.html'">Back to Home</button>
+        <div class="buttons-container">
+            <button class="back-btn" onclick="window.location.href='catalog.html'">
+                <i class="fas fa-arrow-left"></i> Back to Catalog
+            </button>
+            <button class="download-btn" onclick="downloadQR()">
+                <i class="fas fa-download"></i> Download QR
+            </button>
+        </div>
     </div>
+
+    <!-- QR Generator Script -->
+    <script src="../js/qr-generator.js"></script>
 </body>
 
 </html>

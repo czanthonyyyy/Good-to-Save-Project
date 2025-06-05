@@ -191,6 +191,6 @@ function actualizarTotalCarrito() {
     }
     total = Math.round(total * 100) / 100;
 
-    // Corrige el formato del total para que no añada ",00" al final
-    document.getElementsByClassName('carrito-precio-total')[0].innerText = '$' + total.toLocaleString("es");
+    // Muestra el total con dos decimales siempre
+    document.getElementsByClassName('carrito-precio-total')[0].innerText = '$' + total.toFixed(2);
 }

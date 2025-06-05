@@ -305,6 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let total = 0;
 
         cart.forEach(item => {
+            const itemTotal = Number((item.price * item.quantity).toFixed(2));
             const cartItem = document.createElement('div');
             cartItem.className = 'carrito-item';
             cartItem.innerHTML = `
@@ -316,14 +317,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="text" value="${item.quantity}" class="carrito-item-cantidad" disabled>
                         <i class="fas fa-plus sumar-cantidad" data-id="${item.id}"></i>
                     </div>
-                    <span class="carrito-item-precio">$${(item.price * item.quantity).toFixed(2)}</span>
+                    <span class="carrito-item-precio">$${itemTotal.toFixed(2)}</span>
                 </div>
                 <button class="btn-eliminar" data-id="${item.id}">
                     <i class="fas fa-trash"></i>
                 </button>
             `;
             cartItems.appendChild(cartItem);
-            total += item.price * item.quantity;
+            total = Number((total + itemTotal).toFixed(2));
         });
 
         totalPrice.textContent = `$${total.toFixed(2)}`;
