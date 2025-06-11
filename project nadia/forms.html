@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sponsor Application Form</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Sponsor Application</h2>
+    <form action="/submit-sponsor" method="POST" id="sponsorForm">
+      
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <label for="reason">Why do you want to be a sponsor?</label>
+      <textarea id="reason" name="reason" rows="4" required></textarea>
+
+      <label for="help">How do you plan to help as a sponsor?</label>
+      <textarea id="help" name="help" rows="4" required></textarea>
+
+      <label>
+        <input type="checkbox" id="hasExperience" name="hasExperience" />
+        Have you sponsored any events or projects before?
+      </label>
+
+      <div id="experienceDetails" class="hidden">
+        <label for="experienceDesc">If so, please describe your experience:</label>
+        <textarea id="experienceDesc" name="experienceDesc" rows="4"></textarea>
+
+        <label for="years">How long have you been a sponsor? (years)</label>
+        <input type="number" id="years" name="years" min="0" />
+      </div>
+
+      <label>How do you prefer to be contacted?</label>
+      <div class="communication-options">
+        <label><input type="radio" name="communication" value="email" required /> Email</label>
+        <label><input type="radio" name="communication" value="phone" /> Phone</label>
+        <label><input type="radio" name="communication" value="whatsapp" /> Whatsapp</label>
+        <label><input type="radio" name="communication" value="other" /> Other</label>
+      </div>
+
+      <div id="otherCommunicationDiv" class="hidden">
+        <label for="otherCommunication">Please specify:</label>
+        <input type="text" id="otherCommunication" name="otherCommunication" />
+      </div>
+
+      <label>
+        <input type="checkbox" id="hasReferences" name="hasReferences" />
+        Can you provide references from previous sponsorships or partnerships?
+      </label>
+
+      <div id="referencesDetails" class="hidden">
+        <label for="referencesDesc">If so, please provide the names and contact information of the references:</label>
+        <textarea id="referencesDesc" name="referencesDesc" rows="4"></textarea>
+      </div>
+
+      <label for="additional">Do you have any additional information you would like to provide?</label>
+      <textarea id="additional" name="additional" rows="4"></textarea>
+
+      <button type="submit">Submit Application</button>
+    </form>
+  </div>
+
+  <script>
+    const hasExperienceCheckbox = document.getElementById('hasExperience');
+    const experienceDetails = document.getElementById('experienceDetails');
+
+    const hasReferencesCheckbox = document.getElementById('hasReferences');
+    const referencesDetails = document.getElementById('referencesDetails');
+
+    const communicationRadios = document.getElementsByName('communication');
+    const otherCommunicationDiv = document.getElementById('otherCommunicationDiv');
+    const otherCommunicationInput = document.getElementById('otherCommunication');
+
+    hasExperienceCheckbox.addEventListener('change', () => {
+      experienceDetails.classList.toggle('hidden', !hasExperienceCheckbox.checked);
+      document.getElementById('experienceDesc').required = hasExperienceCheckbox.checked;
+      document.getElementById('years').required = hasExperienceCheckbox.checked;
+    });
+
+    hasReferencesCheckbox.addEventListener('change', () => {
+      referencesDetails.classList.toggle('hidden', !hasReferencesCheckbox.checked);
+      document.getElementById('referencesDesc').required = hasReferencesCheckbox.checked;
+    });
+
+    function handleCommunicationChange() {
+      let selectedValue = Array.from(communicationRadios).find(r => r.checked)?.value;
+      if (selectedValue === 'other') {
+        otherCommunicationDiv.classList.remove('hidden');
+        otherCommunicationInput.required = true;
+      } else {
+        otherCommunicationDiv.classList.add('hidden');
+        otherCommunicationInput.required = false;
+        otherCommunicationInput.value = '';
+      }
+    }
+
+    communicationRadios.forEach(radio => {
+      radio.addEventListener('change', handleCommunicationChange);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      experienceDetails.classList.toggle('hidden', !hasExperienceCheckbox.checked);
+      referencesDetails.classList.toggle('hidden', !hasReferencesCheckbox.checked);
+      handleCommunicationChange();
+    });
+  </script>
+</body>
+</html>
