@@ -106,6 +106,23 @@
         </form>
     </div>
 
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-checkmark">
+                <div class="check-icon">
+                    <span class="icon-line line-tip"></span>
+                    <span class="icon-line line-long"></span>
+                    <div class="icon-circle"></div>
+                    <div class="icon-fix"></div>
+                </div>
+            </div>
+            <h3>Application Submitted!</h3>
+            <p>Your application has been successfully sent.</p>
+            <button onclick="window.location.href='/'" class="return-btn">Return to Home</button>
+        </div>
+    </div>
+
     <div id="preloader">
         <div id="loader"></div>
     </div>
@@ -115,5 +132,19 @@
     <script src="../js/jquery-2.1.3.min.js"></script>
     <script src="../js/plugins.js"></script>
     <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('sponsorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Aquí iría la lógica de envío del formulario
+            // Por ahora solo mostraremos el modal
+            const modal = document.getElementById('successModal');
+            modal.style.display = 'flex';
+            
+            // Activar la animación del check
+            const checkIcon = document.querySelector('.check-icon');
+            checkIcon.classList.add('animate');
+        });
+    </script>
 </body>
 </html>
