@@ -194,3 +194,152 @@ function actualizarTotalCarrito() {
     // Muestra el total con dos decimales siempre
     document.getElementsByClassName('carrito-precio-total')[0].innerText = '$' + total.toFixed(2);
 }
+
+// --- INICIO: Sistema de avatar y dashboard de usuario ---
+// Asegúrate de que los scripts de Firebase y firebaseConfig.js estén cargados antes de este script
+(function() {
+  // DEBUG: Log de inicio
+  console.log('[AuthAvatar] Inicializando sistema de avatar y dashboard...');
+  // Observer pattern para auth state
+  const listeners = [];
+  let authState = { status: 'INIT', user: null, error: null };
+  function notify() { listeners.forEach(fn => fn(authState)); }
+  function subscribe(fn) { listeners.push(fn); fn(authState); return () => { const idx = listeners.indexOf(fn); if (idx > -1) listeners.splice(idx, 1); }; }
+  function sanitizeURL(url) { return url ? url.replace(/"/g, '&quot;') : ''; }
+
+  function getInitials(name, email) {
+    if (name) return name.split(' ').map(n => n[0]).join('').toUpperCase();
+    if (email) return email[0].toUpperCase();
+    return '?';
+  }
+
+  function renderAvatar(user) {
+    let avatarHTML = '';
+    if (user.photoURL) {
+      avatarHTML = `<img src="${sanitizeURL(user.photoURL)}" alt="Avatar" class="user-avatar-img" />`;
+    } else if (user.displayName || user.name) {
+      const initials = getInitials(user.displayName || user.name, user.email);
+      avatarHTML = `<span class="user-avatar-initials">${initials}</span>`;
+    } else {
+      avatarHTML = `<span class="user-avatar-default">?</span>`;
+    }
+    return `<button id="user-avatar-btn" aria-label="Open dashboard" class="user-avatar-btn">${avatarHTML}<span class="user-avatar-status online" aria-label="Online"></span></button>`;
+  }
+
+  function renderDashboard(user) {
+    return `
+      <div class="user-dashboard-modal" id="user-dashboard-modal" role="dialog" aria-modal="true">
+        <div class="dashboard-content">
+          <header>
+            <span class="dashboard-avatar">${user.photoURL ? `<img src="${sanitizeURL(user.photoURL)}" alt="Avatar" />` : `<span>${getInitials(user.displayName || user.name, user.email)}</span>`}</span>
+            <span class="dashboard-name">${user.displayName || user.name || user.email}</span>
+            <span class="dashboard-email">${user.email}</span>
+            <button id="dashboard-close" aria-label="Close">&times;</button>
+          </header>
+          <nav>
+            <button data-tab="profile" class="dashboard-tab-btn">Profile</button>
+            <button data-tab="settings" class="dashboard-tab-btn">Settings</button>
+            <button data-tab="activity" class="dashboard-tab-btn">Activity</button>
+          </nav>
+          <main id="dashboard-main"></main>
+          <footer>
+            <button id="logout-btn" class="logout-btn">Logout</button>
+          </footer>
+        </div>
+      </div>
+    `;
+  }
+
+  function showDashboard(user) {
+    let modal = document.getElementById('user-dashboard-modal');
+    if (modal) modal.remove();
+    document.body.insertAdjacentHTML('beforeend', renderDashboard(user));
+    modal = document.getElementById('user-dashboard-modal');
+    const main = modal.querySelector('#dashboard-main');
+    const closeBtn = modal.querySelector('#dashboard-close');
+    const logoutBtn = modal.querySelector('#logout-btn');
+    const tabBtns = modal.querySelectorAll('.dashboard-tab-btn');
+    function renderTab(tab) {
+      switch(tab) {
+        case 'profile':
+          return `<div><h3>Profile</h3><p>Name: ${user.displayName || user.name || ''}</p><p>Email: ${user.email}</p><p>Bio: ${user.bio || ''}</p><small>Edición de perfil próximamente.</small></div>`;
+        case 'settings':
+          return `<div><h3>Settings</h3><p>Preferencias y notificaciones próximamente.</p></div>`;
+        case 'activity':
+          return `<div><h3>Activity</h3><p>Historial de actividad próximamente.</p></div>`;
+        default:
+          return '';
+      }
+    }
+    tabBtns.forEach(btn => {
+      btn.onclick = () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        main.innerHTML = renderTab(btn.dataset.tab);
+      };
+    });
+    // Default tab
+    tabBtns[0].click();
+    closeBtn.onclick = () => modal.remove();
+    logoutBtn.onclick = () => { firebase.auth().signOut(); modal.remove(); };
+    // Accesibilidad: cerrar con ESC
+    modal.onkeydown = (e) => { if (e.key === 'Escape') modal.remove(); };
+    modal.focus();
+  }
+
+  // Suscripción al estado de auth para el header
+  document.addEventListener('DOMContentLoaded', function() {
+    const userArea = document.getElementById('user-area');
+    if (!userArea) {
+      console.error('[AuthAvatar] No se encontró el elemento #user-area en el DOM.');
+      const fallback = document.createElement('div');
+      fallback.textContent = 'Error: No se encontró el área de usuario.';
+      fallback.style.color = 'red';
+      document.body.prepend(fallback);
+      return;
+    }
+    subscribe(state => {
+      console.log('[AuthAvatar] Estado de autenticación:', state);
+      if (state.status === 'AUTHENTICATED' && state.user) {
+        userArea.innerHTML = renderAvatar(state.user);
+        const btn = document.getElementById('user-avatar-btn');
+        if (btn) btn.onclick = () => showDashboard(state.user);
+      } else if (state.status === 'LOADING' || state.status === 'INIT') {
+        userArea.innerHTML = '<span class="user-avatar-loading">Loading...</span>';
+      } else if (state.status === 'ERROR') {
+        userArea.innerHTML = `<span style='color:red;'>Error: ${state.error}</span>`;
+      } else {
+        userArea.innerHTML = `<a href="public/pages/log in form.html" title="sign-up" class="button button-primary cta">Sign Up</a>`;
+      }
+    });
+  });
+
+  // Listener de Firebase Auth
+  if (typeof firebase !== 'undefined') {
+    try {
+      firebase.auth().onAuthStateChanged(async function(user) {
+        if (user) {
+          try {
+            const doc = await firebase.firestore().collection('users').doc(user.uid).get();
+            const profile = doc.exists ? doc.data() : {};
+            authState = { status: 'AUTHENTICATED', user: { ...user, ...profile }, error: null };
+          } catch (e) {
+            authState = { status: 'ERROR', user: null, error: e.message };
+          }
+        } else {
+          authState = { status: 'UNAUTHENTICATED', user: null, error: null };
+        }
+        notify();
+      });
+    } catch (e) {
+      console.error('[AuthAvatar] Error inicializando Firebase Auth:', e);
+      authState = { status: 'ERROR', user: null, error: e.message };
+      notify();
+    }
+  } else {
+    console.error('[AuthAvatar] Firebase no está definido.');
+    authState = { status: 'ERROR', user: null, error: 'Firebase no está definido.' };
+    notify();
+  }
+})();
+// --- FIN: Sistema de avatar y dashboard de usuario ---
