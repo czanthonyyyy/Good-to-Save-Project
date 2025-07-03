@@ -278,11 +278,16 @@
         try {
           const userCredential = await auth.createUserWithEmailAndPassword(email, password);
           const user = userCredential.user;
-          // Guardar nombre en Firestore
+          // Actualizar el perfil de Auth con el nombre
+          await user.updateProfile({ displayName: name });
+          // Guardar datos completos en Firestore
           await db.collection('users').doc(user.uid).set({
             name: name,
             email: email,
-            createdAt: new Date()
+            displayName: name,
+            createdAt: new Date(),
+            bio: '',
+            preferences: {},
           });
           setTimeout(() => {
             submitButton.classList.remove('loading');
