@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile | Good to Save</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="../assets/favicon/site.webmanifest">
+</head>
+<body>
+  <div class="container profile-container">
+    <div class="profile-header">
+      <div class="profile-avatar" id="profile-avatar">
+        <!-- Profile picture or default avatar will be rendered here -->
+      </div>
+      <div class="profile-info">
+        <h2 id="profile-name">Loading...</h2>
+        <p id="profile-email"></p>
+        <p id="profile-bio"></p>
+      </div>
+      <button id="edit-profile-btn" class="button button-primary">Edit Profile</button>
+    </div>
+    <div class="profile-details">
+      <ul>
+        <li><strong>First Name:</strong> <span id="profile-firstname"></span></li>
+        <li><strong>Last Name:</strong> <span id="profile-lastname"></span></li>
+        <li><strong>Phone:</strong> <span id="profile-phone"></span></li>
+        <li><strong>Date of Birth:</strong> <span id="profile-dob"></span></li>
+        <li><strong>Location:</strong> <span id="profile-location"></span></li>
+        <li><strong>Gender:</strong> <span id="profile-gender"></span></li>
+        <li><strong>Occupation:</strong> <span id="profile-occupation"></span></li>
+        <li><strong>Social:</strong> <a id="profile-social" href="#" target="_blank"></a></li>
+        <li><strong>Interests:</strong> <span id="profile-interests"></span></li>
+      </ul>
+    </div>
+    <div id="profile-edit-section" style="display:none;">
+      <form id="profile-edit-form" enctype="multipart/form-data">
+        <div class="input-group">
+          <label for="edit-firstname">First Name</label>
+          <input type="text" id="edit-firstname" required pattern="^[a-zA-Z]{2,30}$" />
+        </div>
+        <div class="input-group">
+          <label for="edit-lastname">Last Name</label>
+          <input type="text" id="edit-lastname" required pattern="^[a-zA-Z]{2,30}$" />
+        </div>
+        <div class="input-group">
+          <label for="edit-phone">Phone</label>
+          <input type="tel" id="edit-phone" pattern="^\+?[0-9]{10,15}$" />
+        </div>
+        <div class="input-group">
+          <label for="edit-dob">Date of Birth</label>
+          <input type="date" id="edit-dob" />
+        </div>
+        <div class="input-group">
+          <label for="edit-bio">Bio</label>
+          <textarea id="edit-bio" maxlength="300"></textarea>
+        </div>
+        <div class="input-group">
+          <label for="edit-location">Location</label>
+          <input type="text" id="edit-location" pattern="^[a-zA-Z\s]{2,50}$" />
+        </div>
+        <div class="input-group">
+          <label for="edit-gender">Gender</label>
+          <select id="edit-gender">
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+            <option value="prefer_not">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="edit-occupation">Occupation</label>
+          <input type="text" id="edit-occupation" pattern="^[a-zA-Z\s]{2,50}$" />
+        </div>
+        <div class="input-group">
+          <label for="edit-social">Social Media Link</label>
+          <input type="url" id="edit-social" pattern="https?://.+" />
+        </div>
+        <div class="input-group">
+          <label for="edit-interests">Interests/Hobbies (comma separated)</label>
+          <input type="text" id="edit-interests" />
+        </div>
+        <div class="input-group">
+          <label for="edit-profilepic">Profile Picture (JPG/PNG/WebP, max 2MB)</label>
+          <input type="file" id="edit-profilepic" accept="image/png, image/jpeg, image/webp" />
+        </div>
+        <div class="form-error-message" id="edit-error-message" style="display:none;"></div>
+        <button type="submit" class="button button-primary">Save</button>
+        <button type="button" id="cancel-edit-btn" class="button">Cancel</button>
+      </form>
+    </div>
+    <div id="profile-loading" style="display:none;">Loading profile...</div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script src="../js/firebaseConfig.js"></script>
+  <script src="../js/profile.js"></script>
+</body>
+</html> 

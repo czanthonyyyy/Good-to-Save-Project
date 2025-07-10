@@ -1,102 +1,122 @@
-# Good to Save
+# Good to Save — Enhanced Firebase User Authentication & Profile System
 
-## Descripción
-Good to Save es un proyecto innovador y plataforma en línea diseñada para abordar los problemas críticos del desperdicio de alimentos y el hambre en Panamá. La plataforma conecta a los consumidores con excedentes de alimentos de restaurantes y supermercados a precios reducidos, mientras también proporciona un medio para donar comidas a personas necesitadas.
+## 🚀 Setup Instructions
 
-## Características Principales
-- 🛒 Catálogo de productos con ofertas de diferentes restaurantes
-- 🔐 Sistema de autenticación de usuarios mediante Firebase
-- 💳 Sistema de pagos integrado
-- 📱 Diseño responsivo para todos los dispositivos
-- 🌐 Integración con redes sociales
-- 🛍️ Carrito de compras funcional
-- 📊 Panel de administración para gestión de contenido
+1. **Firebase Configuration**
+   - Ensure your existing Firebase project is configured in `public/js/firebaseConfig.js` and `src/firebase/firebaseConfig.js`.
+   - No changes to your Firebase project or config are required.
 
-## Estructura del Proyecto
+2. **Security Rules**
+   - Deploy the Firestore rules in `backend/config/firestore.rules` and Storage rules in `backend/config/storage.rules` to your Firebase project for secure user data and profile picture management.
+
+3. **Default Avatar**
+   - Place a default avatar image at `public/assets/favicon/default-avatar.png` for users without a profile picture.
+
+4. **Dependencies**
+   - All features use vanilla JS and Firebase CDN scripts (no build step required).
+
+5. **File Placement**
+   - Place all new/updated files in the correct directories as shown below.
+
+---
+
+## 📁 File Structure & Code Organization
+
 ```
-Good-to-Save-Project/
-├── backend/                # Lógica del servidor y API
-│   └── api/
-│       └── firebase/      # Configuración y servicios de Firebase
-├── css/                   # Estilos adicionales
-│   ├── font-awesome/      # Iconos de Font Awesome
-│   └── micons/           # Iconos personalizados
-├── fonts/                 # Fuentes tipográficas
-│   ├── montserrat/       # Familia tipográfica Montserrat
-│   └── muli/             # Familia tipográfica Muli
-├── public/               # Archivos estáticos y recursos públicos
-│   ├── assets/          # Recursos multimedia
-│   │   ├── favicon/     # Iconos del sitio
-│   │   └── img/         # Imágenes del sitio
-│   ├── components/      # Componentes web reutilizables
-│   ├── css/            # Estilos compilados
-│   ├── js/             # Scripts del cliente
-│   └── pages/          # Páginas estáticas
-└── src/                # Código fuente principal
-    └── firebase/       # Integración con Firebase
+project/
+├── backend/
+│   └── config/
+│       ├── firestore.rules         # Firestore security rules
+│       └── storage.rules           # Storage security rules
+├── public/
+│   ├── assets/
+│   │   └── favicon/
+│   │       └── default-avatar.png  # Default profile avatar
+│   ├── js/
+│   │   ├── auth.js                # Enhanced authentication/session logic
+│   │   ├── profile.js             # Profile display/edit logic
+│   │   ├── utils.js               # Input sanitization & validation
+│   │   └── components.js          # UI update functions (header, avatar)
+│   ├── pages/
+│   │   ├── log in form.html       # Enhanced registration/login form
+│   │   └── profile.html           # Profile display/edit page
+│   └── css/                       # Existing styles (unchanged)
+├── src/
+│   └── firebase/
+│       └── firebaseConfig.js      # Firebase config (unchanged)
+└── README                         # This documentation
 ```
 
-## Archivos Principales
-- `index.html` - Página principal del sitio
-- `vite.config.js` - Configuración del bundler Vite
-- `styles3.css` y `styles5.css` - Hojas de estilo principales
-- `package.json` - Dependencias y scripts del proyecto
+- **auth.js**: Handles login, logout, session persistence, and real-time profile sync.
+- **profile.js**: Fetches, displays, and edits user profile data, including profile picture upload.
+- **utils.js**: Provides input sanitization and file validation utilities.
+- **components.js**: Updates UI elements (header avatar, name) in real-time.
 
-## Tecnologías Utilizadas
-- HTML5 y CSS3
-- JavaScript (ES6+)
-- Firebase (Autenticación y Backend)
-- Vite (Bundler)
-- Font Awesome y Micons (Iconografía)
-- Montserrat y Muli (Tipografías)
+---
 
-## Requisitos del Sistema
-- Node.js (versión recomendada: 14.x o superior)
-- npm o yarn como gestor de paquetes
-- Navegador web moderno con soporte para ES6
-- Conexión a Internet
+## 🧪 Testing Procedures & Manual Checklist
 
-## Instalación y Desarrollo
-1. Clonar el repositorio:
-   ```bash
-   git clone [URL_del_repositorio]
-   ```
-2. Instalar dependencias:
-   ```bash
-   npm install
-   ```
-3. Iniciar el servidor de desarrollo:
-   ```bash
-   npm run dev
-   ```
+### Manual Testing Checklist
+- [ ] Register a new user with all field combinations (required/optional fields, valid/invalid data)
+- [ ] Login with valid and invalid credentials
+- [ ] View profile page and verify all data is displayed correctly
+- [ ] Edit profile fields and save changes; verify updates in UI and Firestore
+- [ ] Upload, update, and remove profile picture; check image validation and display
+- [ ] Test session persistence across page reloads and browser tabs
+- [ ] Test logout and ensure session is cleared
+- [ ] Attempt to access another user's data (should be denied)
+- [ ] Test real-time updates: edit profile in one tab, see changes in another
+- [ ] Test with slow/unstable network (loading/error states)
 
-## Características de la Aplicación
-- **Página Principal**: Interfaz moderna y atractiva que presenta el proyecto
-- **Sistema de Autenticación**: 
-  - Registro de usuarios
-  - Inicio de sesión
-  - Recuperación de contraseña
-  - Autenticación con redes sociales
-- **Catálogo de Productos**:
-  - Listado de ofertas disponibles
-  - Filtros por categorías
-  - Búsqueda avanzada
-- **Carrito de Compras**:
-  - Gestión de productos
-  - Cálculo automático de totales
-  - Proceso de checkout optimizado
-- **Panel de Usuario**:
-  - Historial de pedidos
-  - Gestión de perfil
-  - Preferencias de notificaciones
+### Sample Test Data
+```js
+{
+  firstName: "Jane",
+  lastName: "Smith",
+  email: "jane@example.com",
+  password: "TestPass123!",
+  phone: "+12345678901",
+  dob: "1995-05-15",
+  bio: "I love coding!",
+  location: "San Francisco",
+  gender: "female",
+  occupation: "Designer",
+  social: "https://twitter.com/janesmith",
+  interests: "art, design, travel"
+}
+```
+- Edge cases: empty optional fields, invalid emails, short/long names, large/invalid images, XSS attempts in bio.
 
-## Contacto y Soporte
-- Email: admins@goodtosave.org.pa
-- Teléfono: (+507) 6410 0422
-- Instagram: [@good_to_save_](https://www.instagram.com/good_to_save_?igsh=NGg3MDNubml0b3Nr)
+---
 
-## Estado del Proyecto
-El proyecto está en desarrollo activo. Se aceptan contribuciones siguiendo nuestras guías de contribución.
+## 🛠 Troubleshooting Guide
 
-## Licencia
-Derechos reservados © Good to Save. Consulte el archivo `LICENSE` para más detalles.
+- **Profile picture not uploading:**
+  - Ensure image is JPG/PNG/WebP and <2MB.
+  - Check Firebase Storage rules are deployed.
+- **Cannot edit profile:**
+  - Check Firestore rules are deployed.
+  - Ensure user is authenticated.
+- **Session not persisting:**
+  - Check browser storage settings (localStorage/sessionStorage enabled).
+- **Real-time updates not working:**
+  - Ensure Firestore and Storage listeners are active and not blocked by browser extensions.
+- **Security errors:**
+  - Double-check deployed Firebase security rules.
+
+---
+
+## 🧑‍💻 Code Quality Standards & Best Practices
+
+- Modular code: separate files for auth, profile, utils, and UI components
+- Reusable functions and clear naming conventions
+- Comprehensive comments and error handling throughout
+- All user input is sanitized and validated before saving or displaying
+- Minimal Firebase calls and efficient data queries
+- Real-time listeners cleaned up on logout
+- No changes to existing CSS or visual design
+- Mobile responsive (uses existing styles)
+
+---
+
+For further help, see code comments in each file or contact the project maintainer.

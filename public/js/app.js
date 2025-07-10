@@ -231,7 +231,7 @@ function actualizarTotalCarrito() {
       <div class="user-dashboard-modal" id="user-dashboard-modal" role="dialog" aria-modal="true">
         <div class="dashboard-content">
           <header>
-            <span class="dashboard-avatar">${user.photoURL ? `<img src="${sanitizeURL(user.photoURL)}" alt="Avatar" />` : `<span>${getInitials(user.displayName || user.name, user.email)}</span>`}</span>
+            <span class="dashboard-avatar">${user.profilePicUrl ? `<img src="${sanitizeURL(user.profilePicUrl)}" alt="Avatar" />` : (user.photoURL ? `<img src="${sanitizeURL(user.photoURL)}" alt="Avatar" />` : `<span>${getInitials(user.displayName || user.name, user.email)}</span>`)}</span>
             <span class="dashboard-name">${user.displayName || user.name || user.email}</span>
             <span class="dashboard-email">${user.email}</span>
             <button id="dashboard-close" aria-label="Close">&times;</button>
@@ -262,7 +262,18 @@ function actualizarTotalCarrito() {
     function renderTab(tab) {
       switch(tab) {
         case 'profile':
-          return `<div><h3>Profile</h3><p>Name: ${user.displayName || user.name || ''}</p><p>Email: ${user.email}</p><p>Bio: ${user.bio || ''}</p><small>Edición de perfil próximamente.</small></div>`;
+          return `<div style="max-height: 350px; overflow-y: auto;"><h3>Profile</h3>
+            <p><strong>Name:</strong> ${user.displayName || user.name || ''}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
+            <p><strong>Bio:</strong> ${user.bio || ''}</p>
+            <p><strong>Phone:</strong> ${user.phone || ''}</p>
+            <p><strong>Date of Birth:</strong> ${user.dob || ''}</p>
+            <p><strong>Location:</strong> ${user.location || ''}</p>
+            <p><strong>Gender:</strong> ${user.gender || ''}</p>
+            <p><strong>Occupation:</strong> ${user.occupation || ''}</p>
+            <p><strong>Social:</strong> ${user.social ? `<a href='${sanitizeURL(user.social)}' target='_blank'>${user.social}</a>` : ''}</p>
+            <p><strong>Interests:</strong> ${(user.interests && user.interests.length) ? user.interests.join(', ') : ''}</p>
+          </div>`;
         case 'settings':
           return `<div><h3>Settings</h3><p>Preferencias y notificaciones próximamente.</p></div>`;
         case 'activity':
@@ -343,3 +354,157 @@ function actualizarTotalCarrito() {
   }
 })();
 // --- FIN: Sistema de avatar y dashboard de usuario ---
+
+// --- Enhanced Registration Logic for New Profile Fields ---
+document.addEventListener('DOMContentLoaded', function() {
+  const signupForm = document.getElementById('signupForm');
+  if (!signupForm) return;
+  const signupErrorMessage = document.getElementById('signup-error-message');
+
+  // Helper: Validate interests
+  function validateInterests(str) {
+    if (!str) return true;
+    return str.split(',').every(s => s.trim().length >= 2 && s.trim().length <= 30);
+  }
+
+  // Helper: Validate file
+  function validateProfilePic(file) {
+    if (!file) return true;
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    return validTypes.includes(file.type) && file.size <= 2 * 1024 * 1024;
+  }
+
+  // Helper: Sanitize text
+  function sanitize(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  signupForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    let isValid = true;
+    signupErrorMessage.style.display = 'none';
+    signupErrorMessage.textContent = '';
+    const fields = {
+      firstname: document.getElementById('signup-firstname'),
+      lastname: document.getElementById('signup-lastname'),
+      email: document.getElementById('signup-email'),
+      password: document.getElementById('signup-password'),
+      phone: document.getElementById('signup-phone'),
+      dob: document.getElementById('signup-dob'),
+      bio: document.getElementById('signup-bio'),
+      location: document.getElementById('signup-location'),
+      gender: document.getElementById('signup-gender'),
+      occupation: document.getElementById('signup-occupation'),
+      social: document.getElementById('signup-social'),
+      interests: document.getElementById('signup-interests'),
+      profilepic: document.getElementById('signup-profilepic')
+    };
+    // Validate required fields
+    Object.keys(fields).forEach(key => {
+      const input = fields[key];
+      if (!input) return;
+      const parent = input.parentElement;
+      const errorMessage = parent.querySelector('.validation-message');
+      let valid = true;
+      if (input.required && !input.value) {
+        parent.classList.add('error');
+        errorMessage.textContent = `Please enter your ${input.getAttribute('aria-label')}`;
+        valid = false;
+      } else if (input.pattern && input.value && !new RegExp(input.pattern).test(input.value)) {
+        parent.classList.add('error');
+        errorMessage.textContent = `Please enter a valid ${input.getAttribute('aria-label')}`;
+        valid = false;
+      } else if (key === 'interests' && !validateInterests(input.value)) {
+        parent.classList.add('error');
+        errorMessage.textContent = 'Each interest must be 2-30 chars.';
+        valid = false;
+      } else if (key === 'bio' && input.value.length > 300) {
+        parent.classList.add('error');
+        errorMessage.textContent = 'Bio must be less than 300 characters.';
+        valid = false;
+      } else if (key === 'profilepic' && input.files.length > 0 && !validateProfilePic(input.files[0])) {
+        parent.classList.add('error');
+        errorMessage.textContent = 'Invalid image file (JPG/PNG/WebP, max 2MB).';
+        valid = false;
+      } else {
+        parent.classList.remove('error');
+        parent.classList.add('success');
+      }
+      if (!valid) isValid = false;
+    });
+    if (!isValid) return;
+    // Prepare data
+    const firstName = sanitize(fields.firstname.value.trim());
+    const lastName = sanitize(fields.lastname.value.trim());
+    const email = fields.email.value.trim();
+    const password = fields.password.value;
+    const phone = fields.phone.value.trim();
+    const dob = fields.dob.value;
+    const bio = sanitize(fields.bio.value.trim());
+    const location = sanitize(fields.location.value.trim());
+    const gender = fields.gender.value;
+    const occupation = sanitize(fields.occupation.value.trim());
+    const social = fields.social.value.trim();
+    const interests = fields.interests.value.split(',').map(s => sanitize(s.trim())).filter(Boolean);
+    const profilePicFile = fields.profilepic.files[0];
+    const displayName = `${firstName} ${lastName}`;
+    const submitButton = signupForm.querySelector('button[type="submit"]');
+    submitButton.classList.add('loading');
+    try {
+      // Create user in Firebase Auth
+      const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+      await user.updateProfile({ displayName });
+      // Upload profile picture if present
+      let photoURL = '';
+      if (profilePicFile) {
+        const storageRef = firebase.storage().ref(`profile_pictures/${user.uid}/profile.jpg`);
+        await storageRef.put(profilePicFile);
+        photoURL = await storageRef.getDownloadURL();
+        await user.updateProfile({ photoURL });
+      }
+      // Store user profile in Firestore
+      await firebase.firestore().collection('users').doc(user.uid).set({
+        firstName,
+        lastName,
+        displayName,
+        email,
+        phone,
+        dob,
+        bio,
+        location,
+        gender,
+        occupation,
+        social,
+        interests,
+        photoURL,
+        createdAt: new Date(),
+        preferences: {},
+      });
+      setTimeout(() => {
+        submitButton.classList.remove('loading');
+        window.location.href = '/index.html';
+      }, 800);
+    } catch (error) {
+      submitButton.classList.remove('loading');
+      let message = '';
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          message = 'An account with this email already exists.';
+          break;
+        case 'auth/invalid-email':
+          message = 'The email address is not valid.';
+          break;
+        case 'auth/weak-password':
+          message = 'The password is too weak. It must be at least 8 characters.';
+          break;
+        default:
+          message = error.message || 'An error occurred while signing up. Please try again.';
+      }
+      signupErrorMessage.textContent = message;
+      signupErrorMessage.style.display = 'block';
+    }
+  });
+});
