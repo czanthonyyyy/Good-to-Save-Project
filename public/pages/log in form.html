@@ -35,24 +35,24 @@
             <input type="text" id="signup-firstname" placeholder="First Name" required pattern="^[a-zA-Z]{2,30}$" aria-label="First Name"/>
             <span class="validation-message">Please enter your first name</span>
           </div>
-          <div class="input-group">
+        <div class="input-group">
             <input type="text" id="signup-lastname" placeholder="Last Name" required pattern="^[a-zA-Z]{2,30}$" aria-label="Last Name"/>
             <span class="validation-message">Please enter your last name</span>
-          </div>
-          <div class="input-group">
+        </div>
+        <div class="input-group">
             <input type="email" id="signup-email" placeholder="Email Address" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" aria-label="Email Address"/>
-            <span class="validation-message">Please enter a valid email address</span>
-          </div>
-          <div class="input-group">
+          <span class="validation-message">Please enter a valid email address</span>
+        </div>
+        <div class="input-group">
             <input type="password" id="signup-password" placeholder="Password" required minlength="8" aria-label="Password"/>
-            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
-              <i class="far fa-eye"></i>
-            </button>
-            <span class="validation-message">Password must be at least 8 characters</span>
-            <div class="password-strength">
-              <div class="password-strength-bar"></div>
-            </div>
+          <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+            <i class="far fa-eye"></i>
+          </button>
+          <span class="validation-message">Password must be at least 8 characters</span>
+          <div class="password-strength">
+            <div class="password-strength-bar"></div>
           </div>
+        </div>
           <div class="input-group">
             <input type="tel" id="signup-phone" placeholder="Phone Number (optional)" pattern="^\+?[0-9]{10,15}$" aria-label="Phone Number"/>
             <span class="validation-message">Please enter a valid phone number</span>

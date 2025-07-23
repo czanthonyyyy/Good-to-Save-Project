@@ -399,6 +399,65 @@
     background: #2f9f3d;
 }
 
+/* Paginación del catálogo */
+.catalog-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2.5rem 0 1.5rem 0;
+    user-select: none;
+}
+.catalog-pagination ul {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.catalog-pagination .pagination-btn {
+    background: #fff;
+    border: 1.5px solid #39b54a;
+    color: #39b54a;
+    border-radius: 6px;
+    padding: 0.5rem 1.1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.catalog-pagination .pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f0f7f4;
+}
+.catalog-pagination .pagination-btn.active,
+.catalog-pagination .pagination-btn.page-num.active {
+    background: #39b54a;
+    color: #fff;
+    border-color: #39b54a;
+    box-shadow: 0 2px 8px rgba(57,181,74,0.10);
+    transform: scale(1.08);
+}
+.catalog-pagination .pagination-btn:hover:not(:disabled):not(.active) {
+    background: #eafaf1;
+    color: #27ae60;
+    border-color: #27ae60;
+}
+@media (max-width: 600px) {
+    .catalog-pagination .pagination-btn {
+        padding: 0.4rem 0.7rem;
+        font-size: 1rem;
+        min-width: 32px;
+        min-height: 32px;
+    }
+}
+
 @media screen and (max-width: 1400px) {
     .carrito.activo {
         right: 20px;

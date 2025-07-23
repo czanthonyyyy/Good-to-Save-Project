@@ -105,7 +105,39 @@
         </form>
     </div>
 
+    <!-- Modal de confirmación -->
+    <div id="modal-confirmacion" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+        <div style="background:#fff; padding:2.5rem 2.5rem 2rem 2.5rem; border-radius:18px; text-align:center; max-width:90vw; min-width:320px; box-shadow:0 2px 16px rgba(0,0,0,0.18); position:relative;">
+            <div style="display:flex; justify-content:center; align-items:center; margin-bottom:1.2rem;">
+                <svg width="70" height="70" viewBox="0 0 70 70">
+                    <circle cx="35" cy="35" r="33" fill="#eafaf1" stroke="#27ae60" stroke-width="4"/>
+                    <polyline points="22,38 32,48 48,28" fill="none" stroke="#27ae60" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                        <animate attributeName="points" dur="0.5s" to="22,38 32,48 48,28" fill="freeze" />
+                    </polyline>
+                </svg>
+            </div>
+            <h2 style="color:#27ae60; font-size:1.7rem; margin-bottom:0.5rem;">¡Compra completada!</h2>
+            <p style="color:#222; font-size:1.1rem; margin-bottom:1.2rem;">La información es correcta y tu compra ha sido procesada exitosamente.</p>
+            <button id="btn-ver-qr" style="margin-top:0.5rem; padding:0.6rem 2rem; background:#27ae60; color:#fff; border:none; border-radius:6px; font-size:1.1rem; cursor:pointer; box-shadow:0 1px 4px rgba(39,174,96,0.08);">Ver QR</button>
+        </div>
+    </div>
+
     <script>
+        // Mostrar modal y redirigir al QR
+        function mostrarModalYRedirigir() {
+            const modal = document.getElementById('modal-confirmacion');
+            modal.style.display = 'flex';
+            // Redirigir automáticamente después de 3 segundos
+            const timeout = setTimeout(() => {
+                window.location.href = 'QR.html';
+            }, 3000);
+            // Si el usuario hace clic en el botón, redirige inmediatamente
+            document.getElementById('btn-ver-qr').onclick = function() {
+                clearTimeout(timeout);
+                window.location.href = 'QR.html';
+            };
+        }
+
         // Format card number input with spaces
         document.querySelector('input[placeholder="1234 5678 9012 3456"]').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
@@ -124,11 +156,11 @@
             e.preventDefault();
             const button = document.getElementById('checkout-btn');
             button.classList.add('loading');
-            
-            // Simulate processing (remove in production)
+            // Mostrar modal de confirmación
             setTimeout(() => {
-                window.location.href = 'QR.html';
-            }, 1500);
+                mostrarModalYRedirigir();
+                button.classList.remove('loading');
+            }, 800);
         });
 
         // Basic form validation

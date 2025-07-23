@@ -43,7 +43,6 @@ function ready() {
 
 // Cuando le das comprar, elimina todos los elementos del carrito y se oculta
 function pagarClicked() {
-    alert("¡Gracias por la compra!");
     // Redirige a la página de métodos de pago
     window.location.href = 'paymenthmethod.html';
 }
@@ -507,4 +506,42 @@ document.addEventListener('DOMContentLoaded', function() {
       signupErrorMessage.style.display = 'block';
     }
   });
+});
+
+// --- Paginación del catálogo ---
+document.addEventListener('DOMContentLoaded', function() {
+    const itemsPorPagina = 6;
+    const items = Array.from(document.querySelectorAll('.contenedor-items .item'));
+    const totalPaginas = Math.ceil(items.length / itemsPorPagina);
+    let paginaActual = 1;
+
+    function mostrarPagina(pagina) {
+        paginaActual = pagina;
+        items.forEach((item, idx) => {
+            item.style.display = (idx >= (pagina-1)*itemsPorPagina && idx < pagina*itemsPorPagina) ? '' : 'none';
+        });
+        // Actualizar botones activos
+        document.querySelectorAll('.catalog-pagination .page-num').forEach(btn => {
+            btn.classList.toggle('active', parseInt(btn.dataset.page) === pagina);
+        });
+        // Deshabilitar flechas si corresponde
+        document.getElementById('prev-page').disabled = (pagina === 1);
+        document.getElementById('next-page').disabled = (pagina === totalPaginas);
+    }
+
+    // Listeners para los botones de página
+    document.querySelectorAll('.catalog-pagination .page-num').forEach(btn => {
+        btn.addEventListener('click', function() {
+            mostrarPagina(parseInt(this.dataset.page));
+        });
+    });
+    document.getElementById('prev-page').addEventListener('click', function() {
+        if (paginaActual > 1) mostrarPagina(paginaActual - 1);
+    });
+    document.getElementById('next-page').addEventListener('click', function() {
+        if (paginaActual < totalPaginas) mostrarPagina(paginaActual + 1);
+    });
+
+    // Inicializar mostrando la primera página
+    mostrarPagina(1);
 });

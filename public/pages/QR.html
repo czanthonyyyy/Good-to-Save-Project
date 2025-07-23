@@ -20,10 +20,20 @@
 </head>
 
 <body>
-    <div class="container">
+    <!-- Pantalla de carga -->
+    <div id="qr-loader" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(255,255,255,0.95);z-index:9999;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+        <div style="border:6px solid #eafaf1;border-top:6px solid #27ae60;border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;"></div>
+        <span style="margin-top:1.2rem;color:#27ae60;font-size:1.1rem;font-weight:500;">Cargando tu QR...</span>
+    </div>
+    <div class="container" id="qr-content" style="display:none;">
         <h1 class="title">Scan this QR code to have your surprise box!</h1>
         <div class="qr-container">
             <div id="qrcode"></div>
+        </div>
+        <!-- ID de pedido generado -->
+        <div id="order-id-box" style="margin: 1.5rem auto 0 auto; max-width: 340px; background: #f0f7f4; border-radius: 8px; padding: 1rem 1.2rem; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(39,174,96,0.07); font-size: 1.1rem;">
+            <span id="order-id" style="color:#27ae60; font-weight:600; letter-spacing:2px;"></span>
+            <button id="copy-order-id" title="Copiar ID" style="background:none; border:none; cursor:pointer; color:#27ae60; font-size:1.3rem; margin-left:0.5rem;"><i class="fas fa-copy"></i></button>
         </div>
         <div class="buttons-container">
             <button class="back-btn" onclick="window.location.href='catalog.html'">
@@ -34,7 +44,37 @@
             </button>
         </div>
     </div>
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+    <script>
+        // Mostrar loader y luego el contenido QR
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('qr-loader').style.display = 'none';
+                document.getElementById('qr-content').style.display = '';
+            }, 1500);
+        });
 
+        // Generar y mostrar ID de pedido único
+        function generarOrderID() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let id = 'GTS-';
+            for (let i = 0; i < 8; i++) {
+                id += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return id;
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderId = generarOrderID();
+            document.getElementById('order-id').textContent = orderId;
+            document.getElementById('copy-order-id').onclick = function() {
+                navigator.clipboard.writeText(orderId);
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(()=>{ this.innerHTML = '<i class="fas fa-copy"></i>'; }, 1200);
+            };
+        });
+    </script>
     <!-- QR Generator Script -->
     <script src="../js/qr-generator.js"></script>
 </body>
