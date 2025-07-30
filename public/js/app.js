@@ -225,78 +225,6 @@ function actualizarTotalCarrito() {
     return `<button id="user-avatar-btn" aria-label="Open dashboard" class="user-avatar-btn">${avatarHTML}<span class="user-avatar-status online" aria-label="Online"></span></button>`;
   }
 
-  function renderDashboard(user) {
-    return `
-      <div class="user-dashboard-modal" id="user-dashboard-modal" role="dialog" aria-modal="true">
-        <div class="dashboard-content">
-          <header>
-            <span class="dashboard-avatar">${user.profilePicUrl ? `<img src="${sanitizeURL(user.profilePicUrl)}" alt="Avatar" />` : (user.photoURL ? `<img src="${sanitizeURL(user.photoURL)}" alt="Avatar" />` : `<span>${getInitials(user.displayName || user.name, user.email)}</span>`)}</span>
-            <span class="dashboard-name">${user.displayName || user.name || user.email}</span>
-            <span class="dashboard-email">${user.email}</span>
-            <button id="dashboard-close" aria-label="Close">&times;</button>
-          </header>
-          <nav>
-            <button data-tab="profile" class="dashboard-tab-btn">Profile</button>
-            <button data-tab="settings" class="dashboard-tab-btn">Settings</button>
-            <button data-tab="activity" class="dashboard-tab-btn">Activity</button>
-          </nav>
-          <main id="dashboard-main"></main>
-          <footer>
-            <button id="logout-btn" class="logout-btn">Logout</button>
-          </footer>
-        </div>
-      </div>
-    `;
-  }
-
-  function showDashboard(user) {
-    let modal = document.getElementById('user-dashboard-modal');
-    if (modal) modal.remove();
-    document.body.insertAdjacentHTML('beforeend', renderDashboard(user));
-    modal = document.getElementById('user-dashboard-modal');
-    const main = modal.querySelector('#dashboard-main');
-    const closeBtn = modal.querySelector('#dashboard-close');
-    const logoutBtn = modal.querySelector('#logout-btn');
-    const tabBtns = modal.querySelectorAll('.dashboard-tab-btn');
-    function renderTab(tab) {
-      switch(tab) {
-        case 'profile':
-          return `<div style="max-height: 350px; overflow-y: auto;"><h3>Profile</h3>
-            <p><strong>Name:</strong> ${user.displayName || user.name || ''}</p>
-            <p><strong>Email:</strong> ${user.email}</p>
-            <p><strong>Bio:</strong> ${user.bio || ''}</p>
-            <p><strong>Phone:</strong> ${user.phone || ''}</p>
-            <p><strong>Date of Birth:</strong> ${user.dob || ''}</p>
-            <p><strong>Location:</strong> ${user.location || ''}</p>
-            <p><strong>Gender:</strong> ${user.gender || ''}</p>
-            <p><strong>Occupation:</strong> ${user.occupation || ''}</p>
-            <p><strong>Social:</strong> ${user.social ? `<a href='${sanitizeURL(user.social)}' target='_blank'>${user.social}</a>` : ''}</p>
-            <p><strong>Interests:</strong> ${(user.interests && user.interests.length) ? user.interests.join(', ') : ''}</p>
-          </div>`;
-        case 'settings':
-          return `<div><h3>Settings</h3><p>Preferencias y notificaciones próximamente.</p></div>`;
-        case 'activity':
-          return `<div><h3>Activity</h3><p>Historial de actividad próximamente.</p></div>`;
-        default:
-          return '';
-      }
-    }
-    tabBtns.forEach(btn => {
-      btn.onclick = () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        main.innerHTML = renderTab(btn.dataset.tab);
-      };
-    });
-    // Default tab
-    tabBtns[0].click();
-    closeBtn.onclick = () => modal.remove();
-    logoutBtn.onclick = () => { firebase.auth().signOut(); modal.remove(); };
-    // Accesibilidad: cerrar con ESC
-    modal.onkeydown = (e) => { if (e.key === 'Escape') modal.remove(); };
-    modal.focus();
-  }
-
   // Suscripción al estado de auth para el header
   document.addEventListener('DOMContentLoaded', function() {
     const userArea = document.getElementById('user-area');
@@ -311,9 +239,7 @@ function actualizarTotalCarrito() {
     subscribe(state => {
       console.log('[AuthAvatar] Estado de autenticación:', state);
       if (state.status === 'AUTHENTICATED' && state.user) {
-        userArea.innerHTML = renderAvatar(state.user);
-        const btn = document.getElementById('user-avatar-btn');
-        if (btn) btn.onclick = () => showDashboard(state.user);
+        userArea.innerHTML = `<a href="public/pages/log in form.html" title="sign-up" class="button button-primary cta">Sign Up</a>`;
       } else if (state.status === 'LOADING' || state.status === 'INIT') {
         userArea.innerHTML = '<span class="user-avatar-loading">Loading...</span>';
       } else if (state.status === 'ERROR') {
