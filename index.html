@@ -36,30 +36,16 @@
     <link rel="icon" type="image/png" sizes="16x16" href="public\assets\favicon\favicon-16x16.png">
     <link rel="manifest" href="public\assets\favicon\site.webmanifest">
     <script src="https://kit.fontawesome.com/4496fe260a.js" crossorigin="anonymous"></script>
+    
+    <!-- Good to Save Components -->
+    <script src="public/components/gts-components.js"></script>
 
 </head>
 
 <body id="top">
 
-    <header id="header">
-        <div class="header-inner">
-            <div class="header-logo">
-                <a href="index.html">Good to Save</a>
-            </div>
-
-            <nav id="header-nav-wrap">
-                <ul class="header-main-nav">
-                    <li class="current"><a class="smoothscroll" href="#home" title="home">Home</a></li>
-                    <li><a class="smoothscroll" href="#about" title="about">About</a></li>
-                    <li><a class="smoothscroll" href="#pricing" title="offers">Offers</a></li>
-                    <li><a class="smoothscroll" href="#download" title="download">Download</a></li>
-                    <li><a href="public\pages\catalog.html" title='catalog'>Catalog</a></li>
-                </ul>
-            </nav>
-
-            <div class="header-cta" id="user-area" style="display:flex;align-items:center;"></div>
-        </div>
-    </header> <!-- /header -->
+    <!-- Header Component -->
+    <gts-header current-page="home" base-url=""></gts-header>
 
 
     <!-- home
@@ -473,129 +459,8 @@
     </section> <!-- end download -->
 
 
-    <!-- footer
-    ================================================== -->
-    <footer>
-
-        <div class="footer-main">
-            <div class="row">
-
-                <div class="col-three md-1-3 tab-full footer-info">
-
-                    <div class="footer-logo"></div>
-
-                    <p>
-                        Good to Save isn't just a project. It's a movement towards sustainability, economic empowerment,
-                        and social responsibility. Make a difference with Good to Save and be part of the solution to
-                        food waste and hunger.
-                    </p>
-
-                    <ul class="footer-social-list">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook-square"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-behance"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dribbble"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/good_to_save_?igsh=NGg3MDNubml0b3Nr"><i
-                                    class="fa fa-instagram"></i></a>
-                        </li>
-                    </ul>
-
-
-                </div> <!-- end footer-info -->
-
-                <div class="col-three md-1-3 tab-1-2 mob-full footer-contact">
-
-                    <h4>Contact</h4>
-
-                    <p>
-                        1600 Amphitheatre Parkway<br>
-                        Mountain View, CA <br>
-                        94043 US<br>
-                    </p>
-
-                    <p>
-                        admins@goodtosave.org.pa <br>
-                        Phone: (+507) 6410 0422 <br>
-                        Fax: (+507) 555 0100
-                    </p>
-
-                </div> <!-- end footer-contact -->
-
-                <div class="col-two md-1-3 tab-1-2 mob-full footer-site-links">
-
-                    <h4>Site Links</h4>
-
-                    <ul class="list-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Terms</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-
-                </div> <!-- end footer-site-links -->
-
-                <div class="col-four md-1-2 tab-full footer-subscribe">
-
-                    <h4>Our Newsletter</h4>
-
-                    <p>
-                        Subscribe to our newsletter and get the latest news, updates, and offers.
-                    </p>
-
-                    <div class="subscribe-form">
-
-                        <form id="mc-form" class="group" novalidate="true">
-
-                            <input type="email" value="" name="EMAIL" class="email" id="mc-email"
-                                placeholder="Email Address" required="">
-
-                            <input type="submit" name="subscribe" value="Send">
-
-                            <label for="mc-email" class="subscribe-message"></label>
-
-                        </form>
-
-                    </div>
-
-                </div> <!-- end footer-subscribe -->
-
-            </div> <!-- /row -->
-        </div> <!-- end footer-main -->
-
-
-        <div class="footer-bottom">
-
-            <div class="row">
-
-                <div class="col-twelve">
-                    <div class="copyright">
-                        <span>© Copyright Good to Save 2024.</span>
-                        <span>Developed by Anthony J. Cruz</a></span>
-                    </div>
-
-                    <div id="go-top">
-                        <a class="smoothscroll" title="Back to Top" href="#top">
-                            <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-
-            </div> <!-- end footer-bottom -->
-
-        </div>
-
-    </footer>
+    <!-- Footer Component -->
+    <gts-footer base-url=""></gts-footer>
 
     <div id="preloader">
         <div id="loader"></div>
