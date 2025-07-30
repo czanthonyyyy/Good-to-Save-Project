@@ -60,7 +60,8 @@ html {
 
 html,
 body {
-  width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -1856,6 +1857,15 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
   background: #ffffff;
   padding-top: 18rem;
   overflow: hidden;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+#about .row {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .about-intro {
@@ -1882,10 +1892,12 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 }
 
 .about-features .feature h3 {
-  font-family: "montserrat-regular", sans-serif;
-  font-size: 1.9rem;
+  font-family: "montserrat-bold", sans-serif;
+  font-size: 1.8rem;
   color: #151515;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  margin-top: 3.5rem;
 }
 
 .about-how {
@@ -3007,3 +3019,148 @@ footer ul a:visited {
   .user-dashboard-modal { right: 0; left: 0; width: 100vw; border-radius: 0; }
 }
 /* --- FIN: Avatar y Dashboard --- */
+
+/* ===================================================================
+ *  Estilos para tarjetas de características modernas
+ * =================================================================== */
+
+.about-features .row {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.about-features .features-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2rem;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+.about-features .bgrid {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+}
+
+.about-features {
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+  padding: 4rem 0;
+  border-radius: 20px;
+  margin: 2rem 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.about-features .feature {
+  background: white;
+  border-radius: 15px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 350px;
+  /* Eliminar min-width y flex para que el grid controle el ancho */
+}
+
+.about-features .feature:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.about-features .feature .icon {
+  background: #39b54a;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+.about-features .feature .icon i {
+  color: white;
+  font-size: 2.5rem;
+}
+
+.about-features .feature h3 {
+  font-family: "montserrat-bold", sans-serif;
+  font-size: 1.8rem;
+  color: #151515;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  margin-top: 3.5rem;
+}
+
+.about-features .feature p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Responsive para las tarjetas */
+@media only screen and (max-width: 768px) {
+  .about-features .features-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .about-features .feature {
+    padding: 2rem;
+    min-height: 300px;
+  }
+  
+  .about-features .feature .icon {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .about-features .feature .icon i {
+    font-size: 2rem;
+  }
+  
+  .about-features .feature h3 {
+    font-size: 1.6rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .about-features {
+    padding: 2rem 0;
+    margin: 1rem 0;
+  }
+  
+  .about-features .feature {
+    padding: 1.5rem;
+    min-height: 280px;
+  }
+  
+  .about-features .feature .icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .about-features .feature .icon i {
+    font-size: 1.8rem;
+  }
+  
+  .about-features .feature h3 {
+    font-size: 1.4rem;
+  }
+}
