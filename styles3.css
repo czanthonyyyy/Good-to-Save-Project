@@ -352,7 +352,7 @@ footer {
   padding-bottom: 4.2rem;
   font-size: 14px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgb(255, 255, 255, 0.4);
   background-color: #111111;
   margin-top: 6rem;
 }
@@ -503,7 +503,7 @@ footer ul a:focus {
 }
 
 .footer-subscribe #mc-form ::-webkit-input-placeholder {
-  color: rgba(255, 255, 255, 0.2);
+  color: rgb(255, 255, 255, 0.2);
 }
 
 .footer-subscribe #mc-form :-moz-placeholder {
@@ -647,7 +647,7 @@ footer ul a:focus {
 
   .footer-main ul.list-links li a {
     display: block;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgb(241, 234, 234, 0.03);
     padding: 0.6rem 0;
   }
 
