@@ -136,18 +136,21 @@
 .item .boton-item {
     display: block;
     margin: 10px auto;
-    border: none;
-    background-color: #39b54a;
-    color: #fff;
-    padding: 8px 20px;
-    border-radius: 25px;
+    border: 2px solid #43e660;
+    background-color: #fff;
+    color: #1a3d1a;
+    padding: 7px 16px;
+    border-radius: 18px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(.4,2,.3,1);
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 1px;
     position: relative;
     overflow: hidden;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(67,230,96,0.10);
+    z-index: 2;
 }
 
 .item .boton-item:before {
@@ -157,22 +160,21 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: all 0.5s ease;
+    background: linear-gradient(120deg, transparent, rgba(67,230,96,0.15), transparent);
+    transition: all 0.5s cubic-bezier(.4,2,.3,1);
+    z-index: 1;
 }
 
 .item .boton-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(57, 181, 74, 0.3);
-    background-color: #2f9f3d;
-}
-
-.item .boton-item:hover:before {
-    left: 100%;
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(67,230,96,0.18);
+    background-color: #eafaf1;
+    border-color: #2ecc40;
+    color: #218838;
 }
 
 .item .boton-item:active {
-    transform: translateY(0);
+    transform: translateY(0) scale(0.97);
 }
 
 /* Estilos del carrito */
